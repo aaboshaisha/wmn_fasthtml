@@ -90,7 +90,6 @@ me('#emailFormatted').on('click', () => {
     const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(formattedText)}`;
     window.location.href = mailtoLink;
 });
-
 """
 
 custom_css = """
@@ -109,13 +108,12 @@ button:hover, button:focus { background-color: var(--text); }
 #transcriptionArea, #formattedNotes { height: 200px; resize: vertical; }
 @media screen and (min-width: 768px) { .button-group { flex-direction: row; } button { width: auto; } }
 .htmx-indicator{ opacity:0; transition: opacity 500ms ease-in; display: inline-block;}
-.htmx-request .htmx-indicator{  opacity:1; margin-left: 1rem; width: 24px; height: 24px; }
+.htmx-request .htmx-indicator{ opacity:1; margin-left: 1rem; width: 24px; height: 24px; }
 """
 
 app, rt = fast_app(
     pico=False,  # Disable Pico CSS as we're using our own styles
     hdrs=(Style(custom_css),),
-    # live=True,
     static_path=os.getcwd(),
 )
 
@@ -124,43 +122,47 @@ def get():
     return Titled("Write My Notes",
         Container(
             Div(Button("Record", _id="recordBtn")),
-            Div(
-                Textarea(_id="transcriptionArea", placeholder="Your transcription shows here"),
-                Button("Clear", _id="clearTranscription")
+            Form(
+                Div(
+                    Textarea(_id="transcriptionArea", name="transcriptionArea", placeholder="Your transcription shows here"),
+                    Button("Clear", _id="clearTranscription", type="button")
+                ),
+                Div(
+                    Select(
+                        Option("Select note type:", value="", disabled=True, selected=True),
+                        Option("Patient Letter", value="patient_assistant"),
+                        Option("GP Letter 1", value="gp_assistant_1"),
+                        Option("GP Letter 2", value="gp_assistant_2"),
+                        Option("SBAR Note", value="sbard_assistant"),
+                        Option("Custom Note", value="custom_assistant"),
+                        _id="assistantSelector",
+                        name="assistant",
+                        hx_post="/handle_selection",
+                        hx_target="#customOptions",
+                        hx_trigger="change",
+                    )
+                ),
+                Div(_id="customOptions"),
+                Div(
+                    Button("Submit", _id="submit", 
+                           type="submit",
+                           hx_post="/submit",
+                           hx_target="#formattedNotes",
+                           hx_indicator="#spinner"),
+                    Img(id="spinner", cls="htmx-indicator", src="bars.svg", alt="Loading...")
+                ),
+                _id="noteForm"
             ),
-            Div(
-                Select(
-                    Option("Select note type:", value="", disabled=True, selected=True),
-                    Option("Patient Letter", value="patient_assistant"),
-                    Option("GP Letter 1", value="gp_assistant_1"),
-                    Option("GP Letter 2", value="gp_assistant_2"),
-                    Option("SBAR Note", value="sbard_assistant"),
-                    Option("Custom Note", value="custom_assistant"),
-                    _id="assistantSelector",
-                    name="assistant",
-                    hx_post="/handle_selection",
-                    hx_target="#customOptions",
-                    hx_trigger="change",
-                )
-            ),
-            Div(_id="customOptions"),
-            Div(Button("Submit", _id="submit", 
-                       hx_post="/submit",
-                       hx_include="#transcriptionArea,#assistantSelector,#customOptions",
-                       hx_target="#formattedNotes",
-                       hx_indicator="#spinner",),
-                Img(id="spinner", cls="htmx-indicator", src="bars.svg", alt="Loading...")),
             Div(Textarea(_id="formattedNotes", placeholder="Formatted notes here..")),
             Div(
-                Button("Clear", _id="clearFormatted"),
-                Button("Copy", _id="copyFormatted"),
-                Button("Email", _id="emailFormatted"),
+                Button("Clear", _id="clearFormatted", type="button"),
+                Button("Copy", _id="copyFormatted", type="button"),
+                Button("Email", _id="emailFormatted", type="button"),
                 cls="button-group"
             ),
             Script(speech_to_text_js)
         )
     )
-
 
 assistants = {
     "patient_assistant": patient_assistant,
@@ -185,14 +187,12 @@ checkbox_grid = Div(
         for section in sections),
         )
 
-
 @rt("/handle_selection")
 def post(assistant:str):
     if assistant == "custom_assistant":
         return checkbox_grid
     else:
         return ""
-
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -206,11 +206,9 @@ def get_claude_completion(clinical_notes, assistant, model="claude-3-haiku-20240
         messages=[ { "role": "user", "content": [ { "type": "text", "text": assistant(clinical_notes), } ] } ])
     return message.content[0].text
 
-
 @rt("/submit")
 def post(transcriptionArea: str, assistant:str, sections: list=None, writing_style: str=None):
     result = get_claude_completion(transcriptionArea, assistants[assistant])
     return result
-
 
 serve()
