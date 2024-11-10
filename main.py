@@ -2,9 +2,6 @@ from fasthtml.common import *
 from assistants import *
 import anthropic
 import os
-from dotenv import load_dotenv
-load_dotenv()
-
 
 speech_to_text_js = """
 // Check if browser supports speech recognition
@@ -164,9 +161,7 @@ def get():
         )
     )
 
-serve()
 
-###########
 assistants = {
     "patient_assistant": patient_assistant,
     "gp_assistant_1": gp_assistant_1,
@@ -199,7 +194,10 @@ def post(assistant:str):
         return ""
 
 
-client = anthropic.Anthropic()
+from dotenv import load_dotenv
+load_dotenv()
+client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
+
 def get_claude_completion(clinical_notes, assistant, model="claude-3-haiku-20240307"):
     message = client.messages.create(
         model=model,
@@ -213,3 +211,6 @@ def get_claude_completion(clinical_notes, assistant, model="claude-3-haiku-20240
 def post(transcriptionArea: str, assistant:str, sections: list=None, writing_style: str=None):
     result = get_claude_completion(transcriptionArea, assistants[assistant])
     return result
+
+
+serve()
