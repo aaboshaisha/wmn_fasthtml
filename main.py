@@ -118,7 +118,7 @@ button:hover, button:focus { background-color: var(--text); }
 app, rt = fast_app(
     pico=False,  # Disable Pico CSS as we're using our own styles
     hdrs=(Style(custom_css),),
-    live=True,
+    # live=True,
     static_path=os.getcwd(),
 )
 
