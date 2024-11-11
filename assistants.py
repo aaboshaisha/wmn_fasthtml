@@ -124,55 +124,55 @@ Your letter should be concise yet comprehensive, providing a clear summary of th
 """
 
 def gp_assistant_2(DICTATED_NOTES):
-    return f"""You are a competent psychiatrist tasked with composing a clinical letter to a patient's General Practitioner (GP) based on your consultation notes. These notes were dictated using Google voice typing and may contain errors in spelling and grammar. Your goal is to create a structured, clear, and concise letter that effectively communicates your findings and recommendations.
+    return f"""You are a medical AI assistant tasked with organizing patient notes into a structured format for cognitive impairment assessment. You will be given unstructured patient notes and your job is to categorize the information into specific sections.
 
-Here are the dictated notes from your consultation:
+Here are the patient notes:
+<patient_notes>
+{{DICTATED_NOTES}}
+</patient_notes>
 
-<dictated_notes>
-{DICTATED_NOTES}
-</dictated_notes>
+Your task is to structure these notes according to the following sections:
 
-<structure>
-Using these notes, compose a clinical letter to the patient's GP following this structure:
+1. Chief Complaint & History of Present Illness
+2. Cognitive Symptoms
+3. Functional Assessment
+4. Associated Symptoms
+5. Past Medical History
+6. Medications
+7. Family History
+8. Social History
+9. Risk Factors
+10. Safety Assessment
 
-1. Reason for correspondence
-2. Summary (including diagnosis, current medication list if applicable)
-3. Action for GP (concise and prominently placed)
-4. Assessment / Progress
-5. Investigations
-6. Diagnosis
-7. Treatment plan
-8. Mental State Examination (MSE)
-9. Risk assessment
-10. Follow-up plan
+For each section, organize the relevant information from the patient notes. If there is no relevant information for a particular section, use "N/A" (Not Applicable).
 
-<section instructions>
-Instructions for each section:
+Please format your response as follows:
 
-1. Reason for correspondence: Clearly state why you are writing this letter.
+<structured_notes>
+<section1>
+<title>Chief Complaint & History of Present Illness</title>
+<content>
+[Relevant information from patient notes]
+</content>
+</section1>
 
-2. Summary: Provide a brief overview including:
-- The patient's diagnosis
-- Current medication list (or note if this information is unavailable)
+<section2>
+<title>Cognitive Symptoms</title>
+<content>
+[Relevant information from patient notes]
+</content>
+</section2>
 
-3. Action for GP: Place this section prominently near the beginning of the letter. List specific, actionable instructions for the GP in clear, concise language.
+[Continue with all 10 sections]
+</structured_notes>
 
-4. Assessment / Progress: Summarize the patient's current condition and any changes since the last assessment.
+Make sure to include all relevant information from the patient notes in the appropriate sections. If you're unsure about where a piece of information belongs, use your best judgment to place it in the most suitable section.
 
-5. Investigations: List any tests or investigations performed or recommended.
+Remember to use "N/A" for any sections where no relevant information is found in the patient notes.
 
-6. Diagnosis: Clearly state the patient's diagnosis or diagnoses.
-
-7. Treatment plan: Outline the proposed treatment, including any changes to medication, therapy recommendations, or other interventions.
-
-8. Mental State Examination (MSE): Summarize your observations of the patient's mental state during the consultation.
-
-9. Risk assessment: Provide a clear evaluation of any risks identified, including self-harm or harm to others.
-
-10. Follow-up plan: Specify the next steps in the patient's care, including any planned follow-up appointments or referrals.
+Begin structuring the notes now.
 
 <review>:
-- If information for a particular section is not present in the notes, omit that section from your letter.
 - Use professional, clear, and concise language throughout the letter.
 - Compare your completed letter with the original dictated notes to ensure all relevant information has been included and accurately represented.
 - Check for any spelling or grammatical errors that may have been introduced during the dictation process.
