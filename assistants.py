@@ -124,60 +124,115 @@ Your letter should be concise yet comprehensive, providing a clear summary of th
 """
 
 def gp_assistant_2(DICTATED_NOTES):
-    return f"""You are a medical AI assistant tasked with organizing patient notes into a structured format for cognitive impairment assessment. You will be given unstructured patient notes and your job is to categorize the information into specific sections.
+    return f"""You are a skilled psychiatrist tasked with transforming unstructured notes from a patient consultation into a structured clinical letter. Your goal is to create a clear, accurate, and professionally formatted letter based on the information provided.
 
-Here are the patient notes:
-<patient_notes>
-{{DICTATED_NOTES}}
-</patient_notes>
+Here are the unstructured notes from your consultation:
 
-Your task is to structure these notes according to the following sections:
+<unstructured_notes>
+{UNSTRUCTURED_NOTES}
+</unstructured_notes>
+
+<sections>
+Your clinical letter should be organized into the following sections, as applicable:
 
 1. Chief Complaint & History of Present Illness
-2. Cognitive Symptoms
+- Initial symptoms and when they were first noticed
+- Pattern of progression
+- Impact on daily functioning
+- What prompted seeking medical attention
+- Previous evaluations or treatments
+
+2. Cognitive Symptoms (detailed assessment of each domain)
+- Memory issues (short-term vs long-term)
+- Language difficulties
+- Executive function problems
+- Visuospatial difficulties
+- Attention/concentration issues
+- Behavioral/personality changes
+- Insight level into deficits
+
 3. Functional Assessment
+- Activities of daily living (ADLs)
+- Instrumental activities of daily living (IADLs)
+- Work/school performance
+- Social functioning
+- Driving status
+- Financial management ability
+
 4. Associated Symptoms
+- Sleep patterns
+- Mood changes
+- Anxiety
+- Hallucinations/delusions
+- Movement problems
+- Gait changes
+- Urinary/bowel control
+
 5. Past Medical History
+- Cardiovascular conditions
+- Cerebrovascular events
+- Head injuries/concussions
+- Psychiatric conditions
+- Seizures
+- Sleep disorders
+- Thyroid disease
+- Vitamin deficiencies
+- Surgeries/anesthesia exposure
+
 6. Medications
+- Current medications
+- Recent changes
+- Over-the-counter drugs
+- Supplements
+- History of medications affecting cognition
+
 7. Family History
+- Dementia
+- Psychiatric conditions
+- Neurological disorders
+- Age of onset in affected relatives
+
 8. Social History
+- Education level
+- Occupation
+- Living situation
+- Support system
+- Substance use (alcohol, tobacco, drugs)
+- Exercise habits
+- Diet
+- Hobbies/activities
+
 9. Risk Factors
+- Cardiovascular risk factors
+- Head trauma history
+- Environmental exposures
+- Sleep apnea
+- Depression
+
 10. Safety Assessment
+- Fall risk
+- Wandering
+- Access to weapons
+- Driving safety
+- Financial vulnerability
+- Elder abuse screening
 
-For each section, organize the relevant information from the patient notes. If there is no relevant information for a particular section, use "N/A" (Not Applicable).
 
-Please format your response as follows:
+<steps>
+Follow these steps to create the clinical letter:
 
-<structured_notes>
-<section1>
-<title>Chief Complaint & History of Present Illness</title>
-<content>
-[Relevant information from patient notes]
-</content>
-</section1>
+1. Carefully review the unstructured notes, identifying information that corresponds to each of the sections listed above.
 
-<section2>
-<title>Cognitive Symptoms</title>
-<content>
-[Relevant information from patient notes]
-</content>
-</section2>
+2. Extract relevant content from the notes and organize it under the appropriate sections. If information for a particular section is not present in the notes, omit that section from your letter.
 
-[Continue with all 10 sections]
-</structured_notes>
+3. Rewrite the extracted information in a clear, professional manner, correcting any spelling or grammatical errors. Ensure that your edits do not alter the original meaning or introduce new information.
 
-Make sure to include all relevant information from the patient notes in the appropriate sections. If you're unsure about where a piece of information belongs, use your best judgment to place it in the most suitable section.
+4. After drafting the letter, compare it to the original notes to verify that all important information has been accurately captured and no critical details have been omitted.
 
-Remember to use "N/A" for any sections where no relevant information is found in the patient notes.
+5. Format the letter professionally, using appropriate headings for each section included.
 
-Begin structuring the notes now.
-
-<review>:
-- Use professional, clear, and concise language throughout the letter.
-- Compare your completed letter with the original dictated notes to ensure all relevant information has been included and accurately represented.
-- Check for any spelling or grammatical errors that may have been introduced during the dictation process.
-
-Ensure that each section of the letter is clearly labeled with appropriate headings.
+<review> to include only those sections for which you have relevant information from the unstructured notes. 
+Your letter should be concise yet comprehensive, providing a clear summary of the patient's condition and your professional assessment.
 """
 
 def custom_assistant(SECTIONS_FORMATTED, WRITING_STYLE):
