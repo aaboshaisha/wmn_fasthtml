@@ -123,7 +123,7 @@ Your letter should be concise yet comprehensive, providing a clear summary of th
 
 """
 
-def gp_assistant_2(DICTATED_NOTES):
+def gp_assistant_2(UNSTRUCTURED_NOTES):
     return f"""You are a skilled psychiatrist tasked with transforming unstructured notes from a patient consultation into a structured clinical letter. Your goal is to create a clear, accurate, and professionally formatted letter based on the information provided.
 
 Here are the unstructured notes from your consultation:
