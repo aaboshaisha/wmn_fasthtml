@@ -201,7 +201,7 @@ client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
 def get_claude_completion(clinical_notes, assistant, model="claude-3-haiku-20240307"):
     message = client.messages.create(
         model=model,
-        max_tokens=1000,
+        max_tokens=4096,
         temperature=0,
         messages=[ { "role": "user", "content": [ { "type": "text", "text": assistant(clinical_notes), } ] } ])
     return message.content[0].text
