@@ -154,10 +154,6 @@ Your clinical letter should be organized into the following sections, as applica
 3. Functional Assessment
 - Activities of daily living (ADLs)
 - Instrumental activities of daily living (IADLs)
-- Work/school performance
-- Social functioning
-- Driving status
-- Financial management ability
 
 4. Associated Symptoms
 - Sleep patterns
@@ -169,38 +165,12 @@ Your clinical letter should be organized into the following sections, as applica
 - Urinary/bowel control
 
 5. Past Medical History
-- Cardiovascular conditions
-- Cerebrovascular events
-- Head injuries/concussions
-- Psychiatric conditions
-- Seizures
-- Sleep disorders
-- Thyroid disease
-- Vitamin deficiencies
-- Surgeries/anesthesia exposure
 
 6. Medications
-- Current medications
-- Recent changes
-- Over-the-counter drugs
-- Supplements
-- History of medications affecting cognition
 
 7. Family History
-- Dementia
-- Psychiatric conditions
-- Neurological disorders
-- Age of onset in affected relatives
 
 8. Social History
-- Education level
-- Occupation
-- Living situation
-- Support system
-- Substance use (alcohol, tobacco, drugs)
-- Exercise habits
-- Diet
-- Hobbies/activities
 
 9. Risk Factors
 - Cardiovascular risk factors
@@ -210,12 +180,6 @@ Your clinical letter should be organized into the following sections, as applica
 - Depression
 
 10. Safety Assessment
-- Fall risk
-- Wandering
-- Access to weapons
-- Driving safety
-- Financial vulnerability
-- Elder abuse screening
 
 
 <steps>
