@@ -198,7 +198,7 @@ from dotenv import load_dotenv
 load_dotenv()
 client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
 
-def get_claude_completion(clinical_notes, assistant, model="claude-3-haiku-20240307"):
+def get_claude_completion(clinical_notes, assistant, model="claude-3-5-sonnet-20241022"):
     message = client.messages.create(
         model=model,
         max_tokens=4096,
